@@ -1,0 +1,81 @@
+-- Measures added to the HRDataset_v14 table in the live Power BI model.
+-- These are historical records, not a point-in-time snapshot or annualized
+-- attrition measure.
+Employees in Dataset = COUNTROWS('HRDataset_v14')
+
+Active Employee Records =
+CALCULATE(
+    [Employees in Dataset],
+    'HRDataset_v14'[EmploymentStatus] = "Active"
+)
+
+Terminated Employee Records =
+CALCULATE(
+    [Employees in Dataset],
+    'HRDataset_v14'[Termd] = 1
+)
+
+Termination Share of Dataset =
+DIVIDE(
+    [Terminated Employee Records],
+    [Employees in Dataset]
+)
+
+Voluntary Terminations =
+CALCULATE(
+    [Employees in Dataset],
+    'HRDataset_v14'[EmploymentStatus] = "Voluntarily Terminated"
+)
+
+Hires =
+CALCULATE(
+    [Employees in Dataset],
+    USERELATIONSHIP('Calendar'[Date], 'HRDataset_v14'[DateofHire])
+)
+
+Exits =
+CALCULATE(
+    [Terminated Employee Records],
+    USERELATIONSHIP('Calendar'[Date], 'HRDataset_v14'[DateofTermination])
+)
+
+Average Engagement Score =
+AVERAGE('HRDataset_v14'[EngagementSurvey])
+
+Average Satisfaction Score =
+AVERAGE('HRDataset_v14'[EmpSatisfaction])
+
+Average Absences per Record =
+AVERAGE('HRDataset_v14'[Absences])
+
+Average Late Days (Last 30) =
+AVERAGE('HRDataset_v14'[DaysLateLast30])
+
+-- Calculated column for the termination-reason visual.
+-- The source TermReason column is retained unchanged for traceability.
+TermReason_Display =
+VAR Reason = TRIM('HRDataset_v14'[TermReason])
+RETURN
+    SWITCH(
+        TRUE(),
+        ISBLANK(Reason) || Reason = "", "Not Specified",
+        Reason = "N/A-StillEmployed", "Still Employed (Not Terminated)",
+        Reason = "Learned that he is a gangster", "Other / Unclassified",
+        Reason = "career change", "Career Change",
+        Reason = "hours", "Hours",
+        Reason = "return to school", "Return to School",
+        Reason = "Another position", "Another Position",
+        Reason = "unhappy", "Unhappy",
+        Reason = "attendance", "Attendance",
+        Reason = "performance", "Performance",
+        Reason = "retiring", "Retiring",
+        Reason = "relocation out of area", "Relocation Out of Area",
+        Reason = "more money", "More Money",
+        Reason = "military", "Military",
+        Reason = "no-call, no-show", "No-Call, No-Show",
+        Reason = "Fatal attraction", "Fatal Attraction",
+        Reason = "maternity leave - did not return", "Maternity Leave - Did Not Return",
+        Reason = "medical issues", "Medical Issues",
+        Reason = "gross misconduct", "Gross Misconduct",
+        Reason
+    )

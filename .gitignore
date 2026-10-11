@@ -1,0 +1,8 @@
+# Local Power BI files can embed employee-level records.
+*.pbix
+*.pbit
+
+# Keep the downloaded source dataset local.
+data/
+*.csv
+!portfolio-data/*.csv
