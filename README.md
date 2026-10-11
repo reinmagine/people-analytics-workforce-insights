@@ -4,7 +4,6 @@ A Power BI portfolio project exploring workforce composition, employee movement,
 recruitment, and employee experience using a historical sample HR dataset.
 
 > **Important:** This is an illustrative analysis of a third-party sample dataset.
-> It is not Coca-Cola data and does not represent a current workforce.
 
 ## Report scope
 
