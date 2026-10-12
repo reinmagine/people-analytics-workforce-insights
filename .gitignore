@@ -7,10 +7,7 @@ data/
 *.csv
 !portfolio-data/*.csv
 
-# Publish sanitized copies instead of local screenshots with small-cell detail.
+# Keep the local model screenshots private; reviewed dashboard screenshots are published.
 img/calculated-measures.png
 img/data-model.png
-img/page-1-workforce-overview.png
-img/page-2-workforce-movement-retention.png
-img/page-3-employee-exp-op.png
 !img/portfolio-safe-*.png

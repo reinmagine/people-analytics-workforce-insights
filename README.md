@@ -40,25 +40,25 @@ The report turns 311 employee records from 2006–2018 into a three-page set of 
 
 ## Dashboard
 
-The dashboard is organized to move from workforce composition to movement and then employee experience. Screenshots below are portfolio-safe copies: department groups and categories with fewer than five records are masked, and year-level movement counts are replaced with a broad-period summary. Original local screenshots are not intended for publication.
+The dashboard is organized to move from workforce composition to movement and then employee experience. These screenshots show the original report visuals, including year-level counts and categories with fewer than five records. They are included to present the dashboard as built; use the aggregate CSV summaries for outputs that apply small-cell suppression.
 
 ### 1. Workforce Overview
 
 Shows total records, employment status, department distribution, and recruitment sources.
 
-![Portfolio-safe Workforce Overview dashboard](img/portfolio-safe-workforce-overview.png)
+![Workforce Overview dashboard](img/page-1-workforce-overview.png)
 
 ### 2. Workforce Movement and Retention
 
-Shows termination-reason categories after small-cell suppression. In the public-safe copy, the annual movement visual is replaced with the two-period aggregate so low annual event counts are not disclosed.
+Shows annual hires and terminations and the report's recorded termination-reason categories, including low-frequency counts.
 
-![Portfolio-safe Workforce Movement and Retention dashboard](img/portfolio-safe-workforce-movement-retention.png)
+![Workforce Movement and Retention dashboard](img/page-2-workforce-movement-retention.png)
 
 ### 3. Employee Experience and Operations
 
-Compares engagement, satisfaction, absences, and recent lateness across departments. Small department groups are suppressed in the screenshot and aggregate export.
+Compares engagement, satisfaction, absences, and recent lateness across departments. The screenshot preserves the original department breakdowns.
 
-![Portfolio-safe Employee Experience and Operations dashboard](img/portfolio-safe-employee-experience.png)
+![Employee Experience and Operations dashboard](img/page-3-employee-exp-op.png)
 
 ## What I built
 
@@ -97,7 +97,7 @@ The model screenshot illustrates the employee and calendar tables. The measure s
 
 - A terminated-record share is not the same as a turnover rate. Time-based workforce measures need a defined period and an appropriate workforce denominator.
 - Hire dates and termination dates are separate analytical roles. Explicitly selecting the relevant calendar relationship makes event counts easier to interpret and validate.
-- Privacy controls must cover the full presentation layer. Suppressing small groups in CSV exports is not enough if filters, charts, or annual trends still reveal low counts.
+- Suppression rules should be checked across every output. The published aggregate summaries suppress small groups; the original dashboard screenshots intentionally show the report's full category and year-level detail.
 - Averages need context. Department-level differences should be considered alongside group sizes, suppressed categories, and the limits of the source fields; they do not demonstrate cause or performance.
 
 ## Data products
@@ -110,7 +110,9 @@ The model screenshot illustrates the employee and calendar tables. The measure s
 | `portfolio-data/termination-reason-summary.csv` | Termination-reason counts; low-frequency categories are grouped |
 | `portfolio-data/department-experience-summary.csv` | Department-level experience and absence averages; small groups are omitted |
 | `hr-analytics-measures.dax` | DAX reference for the local model |
-| `img/portfolio-safe-*.png` | Sanitized dashboard, data-model, and measure screenshots |
+| `img/page-*.png` | Original dashboard screenshots with report-level detail |
+| `img/portfolio-safe-data-model.png` | Data-model screenshot |
+| `img/portfolio-safe-calculated-measures.png` | DAX measure-group screenshot |
 
 Small-cell suppression means some category totals may not add up to the full sample total. The published CSVs contain aggregate data only.
 
@@ -128,10 +130,10 @@ The local PBIX and downloaded employee-level CSV are intentionally excluded from
 - A termination share across all sample records is not an annualized attrition or turnover rate. A valid rate requires an appropriate time period and workforce denominator.
 - The source does not define a time window for absence counts; they are presented as averages per record, not absence rates.
 - Recruitment-source counts measure records attributed to a channel, not candidate quality, hiring conversion, or channel effectiveness.
-- Department averages are descriptive and can be unstable for small groups. Groups below five are suppressed in public summaries and screenshots.
+- Department averages are descriptive and can be unstable for small groups. The aggregate CSV summaries suppress groups below five; the original dashboard screenshots retain the report's department breakdowns.
 - Termination reasons reflect source-recorded categories and do not establish causation.
 - The source does not contain LMC or grievance data; those processes are outside this analysis.
-- Employee-level records and the local PBIX are not published. Aggregate charts can still disclose small groups, so screenshots and exports use suppression or grouping before publication.
+- Employee-level records and the local PBIX are not published. The original dashboard screenshots do show small-group counts, including categories with fewer than five records. The aggregate CSV summaries apply suppression or grouping, but are distinct outputs and do not change what is visible in the screenshots.
 
 ## Source and attribution
 
